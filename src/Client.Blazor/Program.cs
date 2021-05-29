@@ -1,10 +1,11 @@
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
+using MudBlazor.Services;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace Client.Blazor
+namespace POSHero.Client.Blazor
 {
     public class Program
     {
@@ -14,6 +15,8 @@ namespace Client.Blazor
             builder.RootComponents.Add<App>("#app");
 
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+
+            builder.Services.AddMudServices();
 
             await builder.Build().RunAsync();
         }
