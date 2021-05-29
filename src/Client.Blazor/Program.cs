@@ -1,22 +1,17 @@
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
-using Microsoft.Extensions.DependencyInjection;
-using MudBlazor.Services;
-using System;
-using System.Net.Http;
+using POSHero.Client.Blazor.Extensions;
 using System.Threading.Tasks;
 
 namespace POSHero.Client.Blazor
 {
-    public class Program
+    public static class Program
     {
         public static async Task Main(string[] args)
         {
-            var builder = WebAssemblyHostBuilder.CreateDefault(args);
-            builder.RootComponents.Add<App>("#app");
-
-            builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
-
-            builder.Services.AddMudServices();
+            var builder = WebAssemblyHostBuilder
+                       .CreateDefault(args)
+                       .AddRootComponents()
+                       .AddClientServices();
 
             await builder.Build().RunAsync();
         }
